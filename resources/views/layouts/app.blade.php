@@ -5,32 +5,81 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>my-Task</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <!-- project css file  -->
+        <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/responsive.dataTables.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/plugins/datatables/dataTables.bootstrap5.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/plugins/nestable/jquery-nestable.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/plugins/fullcalendar/main.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/plugins/prism/prism.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/my-task.style.min.css') }}">
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+    <body id="mytask-layout" class="theme-indigo">
+            @include('includes.sidebar')
+            <!-- main body area -->
+            <div class="main px-lg-4 px-md-4">
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
+{{--                <!-- Body: Header -->--}}
+                @include('includes.header')
+
+                @yield('content')
+            </div>
     </body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Sidebar mini toggle
+            document.querySelectorAll('.sidebar-mini-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    const sidebar = document.querySelector('.sidebar');
+                    sidebar.classList.toggle('sidebar-mini');
+                });
+            });
+
+            // Collapse toggle for menu items
+            document.querySelectorAll('.m-link[data-bs-toggle="collapse"]').forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('data-bs-target');
+                    const target = document.querySelector(targetId);
+
+                    if (!target) return;
+
+                    const isShown = target.classList.contains('show');
+
+                    // Close all others
+                    document.querySelectorAll('.sub-menu.show').forEach(function (menu) {
+                        menu.classList.remove('show');
+                        menu.closest('li').classList.add('collapsed');
+                    });
+
+                    if (isShown) {
+                        target.classList.remove('show');
+                        link.closest('li').classList.add('collapsed');
+                    } else {
+                        target.classList.add('show');
+                        link.closest('li').classList.remove('collapsed');
+                    }
+                });
+            });
+
+            // Highlight active menu items on load
+            document.querySelectorAll('.ms-link.active').forEach(function (activeLink) {
+                const subMenu = activeLink.closest('.sub-menu');
+                if (subMenu) {
+                    subMenu.classList.add('show');
+                    const parentLi = subMenu.closest('li');
+                    if (parentLi) parentLi.classList.remove('collapsed');
+                }
+            });
+        });
+    </script>
+
+    <script src="{{ asset('assets/plugins/fullcalendar/main.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/prism/prism.js') }}"></script>
+    @stack('before-scripts')
+
+    @stack('after-scripts')
 </html>
