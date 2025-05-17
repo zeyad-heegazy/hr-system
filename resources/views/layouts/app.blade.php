@@ -18,12 +18,8 @@
 
     <body id="mytask-layout" class="theme-indigo">
             @include('includes.sidebar')
-            <!-- main body area -->
             <div class="main px-lg-4 px-md-4">
-
-{{--                <!-- Body: Header -->--}}
                 @include('includes.header')
-
                 @yield('content')
             </div>
     </body>

@@ -145,4 +145,5 @@
         </div>
     </nav>
 </div>
-@include('layouts.common-oppup')
+
+@include('includes.common.popups')
