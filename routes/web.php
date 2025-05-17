@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EmployeeController;
 
 Route::get('/', function () {
     return redirect()->route('admin.dashboard');
@@ -49,7 +50,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/out-client/clients-profile', fn() => view('admin.out-client.clients-profile'))->name('admin.out-client.clients-profile');
 
     // Employees
-    Route::get('/our-employee/members', fn() => view('admin.our-employee.members'))->name('admin.our-employee.members');
+    Route::get('/our-employee/members', [EmployeeController::class ,'index'])->name('admin.our-employee.members');
     Route::get('/our-employee/members-profile', fn() => view('admin.our-employee.members-profile'))->name('admin.our-employee.members-profile');
     Route::get('/our-employee/holidays', fn() => view('admin.our-employee.holidays'))->name('admin.our-employee.holidays');
     Route::get('/our-employee/attendance-employee', fn() => view('admin.our-employee.attendance-employee'))->name('admin.our-employee.attendance-employee');
