@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DepartmentController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('admin.dashboard');
 });
 
 Route::get('/dashboard', function () {
@@ -54,7 +55,10 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/our-employee/attendance-employee', fn() => view('admin.our-employee.attendance-employee'))->name('admin.our-employee.attendance-employee');
     Route::get('/our-employee/attendance', fn() => view('admin.our-employee.attendance'))->name('admin.our-employee.attendance');
     Route::get('/our-employee/leave-request', fn() => view('admin.our-employee.leave-request'))->name('admin.our-employee.leave-request');
-    Route::get('/our-employee/department', fn() => view('admin.our-employee.department'))->name('admin.our-employee.department');
+    Route::get('/our-employee/department', [DepartmentController::class, 'index'])->name('admin.our-employee.department');
+    Route::post('/our-employee/department', [DepartmentController::class, 'store'])->name('admin.our-employee.department.store');
+    Route::patch('/our-employee/department', [DepartmentController::class, 'update'])->name('admin.our-employee.department.update');
+    Route::delete('/our-employee/department/{id}', [DepartmentController::class, 'destroy'])->name('admin.our-employee.department.destroy');
 
     // Accounts
     Route::get('/accounts/invocies', fn() => view('admin.accounts.invocies'))->name('admin.accounts.invocies');

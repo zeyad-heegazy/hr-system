@@ -23,28 +23,40 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Department Name</th>
-                                    <th>Employee UnderWork</th>
+{{--                                    <th>Employee UnderWork</th>--}}
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        <span class="fw-bold">1</span>
-                                    </td>
-                                    <td>
-                                        Web Development
-                                    </td>
-                                    <td>
-                                        40
-                                    </td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#depedit"><i class="icofont-edit text-success"></i></button>
-                                            <button type="button" class="btn btn-outline-secondary deleterow"><i class="icofont-ui-delete text-danger"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @foreach($departments as $department)
+                                    <tr>
+                                        <td>
+                                            <span class="fw-bold">{{$department->id}}</span>
+                                        </td>
+                                        <td>
+                                            {{$department->name}}
+                                        </td>
+{{--                                        <td>--}}
+{{--                                            40--}}
+{{--                                        </td>--}}
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                <button type="button"
+                                                        class="btn btn-outline-secondary"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editDepartmentModal"
+                                                        onclick="setEditDepartment('{{ $department->id }}', '{{ $department->name }}')">
+                                                    <i class="icofont-edit text-success"></i>
+                                                </button>
+                                                <form method="POST" action="{{route('admin.our-employee.department.destroy', $department->id)}}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-outline-secondary"><i class="icofont-ui-delete text-danger"></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -54,9 +66,46 @@
         </div>
     </div>
 
+    <!-- Edit Department Modal -->
+    <div class="modal fade" id="editDepartmentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+                <form method="POST" action="{{ route('admin.our-employee.department.update') }}">
+                    @csrf
+                    @method('PATCH')
+                    <input type="hidden" name="id" id="editDepartmentId">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Department</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="editDepartmentName" class="form-label">Department Name</label>
+                            <input type="text" class="form-control" name="name" id="editDepartmentName" required>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
     <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
     <script src="{{ asset('assets/bundles/dataTables.bundle.js') }}"></script>
 
+    <script>
+        function setEditDepartment(id, name) {
+            document.getElementById('editDepartmentId').value = id;
+            document.getElementById('editDepartmentName').value = name;
+        }
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -66,15 +115,6 @@
                 columnDefs: [
                     { targets: [-1, -3], className: 'dt-body-right' }
                 ]
-            });
-
-            tableElement.addEventListener('click', function (e) {
-                if (e.target && e.target.classList.contains('deleterow')) {
-                    const row = e.target.closest('tr');
-                    if (row) {
-                        dataTable.row(row).remove().draw();
-                    }
-                }
             });
         });
     </script>
