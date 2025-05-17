@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Department;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -26,6 +27,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin User',
             'email' => 'admin@admin.com',
             'role_id' => 1
+        ]);
+
+        DB::table('departments')->insert([
+            ['name' => 'Web Development'],
+            ['name' => 'App Development'],
+            ['name' => 'marketing'],
+            ['name' => 'Support'],
         ]);
     }
 }
