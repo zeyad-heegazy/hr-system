@@ -22,8 +22,11 @@ return new class extends Migration
             $table->unsignedBigInteger('department_id');
             $table->string('designation');
             $table->string('description')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->date('joining_date');
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
         });
     }
