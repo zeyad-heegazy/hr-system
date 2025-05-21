@@ -1,0 +1,94 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Project;
+use Illuminate\Http\Request;
+
+class ProjectController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $projects = Project::all();
+        return view('admin.project.project', compact('projects'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        dd($request->file('files[]'));
+        $storedFiles = [];
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $file) {
+                $storedFiles[] = $file->store('projects/files', 'public');
+            }
+        }
+
+
+        if ($request->hasFile('icon')) {
+            $icon = $request->file('icon');
+            $iconPath = $icon->store('projects/icons', 'public');
+        }
+
+        Project::create([
+            'name' => $request->name,
+            'category' => $request->category,
+            'description' => $request->description ?? null,
+            'files' => json_encode($storedFiles),
+            'icon' => $request->hasFile('icon') ? $icon->store('projects/icons', 'public'): null,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'lead_employee_id' => $request->lead_employee_id,
+            'budget' => $request->budget,
+            'status' => $request->input('status', 'Pending'),
+            'priority' => $request->priority,
+        ]);
+
+        return redirect()->back()->with('success', 'Project created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Project $project)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Project $project)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Project $project)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Project $project)
+    {
+        //
+    }
+}

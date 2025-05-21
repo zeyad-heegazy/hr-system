@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ProjectController;
 
 Route::get('/', function () {
     return redirect()->route('admin.dashboard');
@@ -27,7 +28,8 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/help', fn() => view('admin.help'))->name('admin.help');
 
     // Project routes
-    Route::get('/project/index', fn() => view('admin.project.index'))->name('admin.project.index');
+    Route::get('/project/index', [ProjectController::class, 'index'])->name('admin.project.index');
+    Route::post('/project/store', [ProjectController::class, 'store'])->name('admin.project.store');
     Route::get('/project/tasks', fn() => view('admin.project.tasks'))->name('admin.project.tasks');
     Route::get('/project/timesheet', fn() => view('admin.project.timesheet'))->name('admin.project.timesheet');
     Route::get('/project/leaders', fn() => view('admin.project.leaders'))->name('admin.project.leaders');
