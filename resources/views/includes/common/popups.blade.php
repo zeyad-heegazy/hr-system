@@ -28,20 +28,23 @@ $departments = \App\Models\Department::all();
 </div>
 
 <!-- Add Employee-->
-<div class="modal fade" id="createemp" tabindex="-1"  aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
+<div class="modal fade" id="createemp" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-content" style="max-height: 70vh; overflow-y: scroll;">
             <div class="modal-header">
-                <h5 class="modal-title  fw-bold" id="createprojectlLabel"> Add Employee</h5>
+                <h5 class="modal-title fw-bold" id="createprojectlLabel">Add Employee</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="POST" action="{{ route('admin.our-employee.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
+
+                    {{-- BASIC INFO --}}
                     <div class="mb-3">
                         <label class="form-label">Employee Name</label>
                         <input type="text" name="name" class="form-control" placeholder="Enter full name" required>
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label">Employee Profile</label>
                         <input type="file" name="image" class="form-control" required>
@@ -111,6 +114,101 @@ $departments = \App\Models\Department::all();
                     <div class="mb-3">
                         <label class="form-label">Description (optional)</label>
                         <textarea name="description" class="form-control" rows="3" placeholder="Additional notes..."></textarea>
+                    </div>
+
+                    {{-- EXPERIENCE SECTION --}}
+                    <hr>
+                    <h6 class="fw-bold text-primary">Experience (Optional)</h6>
+                    <div id="experience-wrapper">
+                        <div class="row g-3 mb-3 experience-entry">
+                            <div class="col-md-4">
+                                <label class="form-label">Company</label>
+                                <input type="text" name="experience_name[]" class="form-control" placeholder="Company or Position Name">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">From</label>
+                                <input type="date" name="experience_from[]" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">To</label>
+                                <input type="date" name="experience_to[]" class="form-control">
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="button" class="btn btn-danger remove-experience w-100">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-outline-primary" id="add-experience">Add More Experience</button>
+                    </div>
+
+                    {{-- PERSONAL INFO SECTION --}}
+                    <hr>
+                    <h6 class="fw-bold text-primary">Personal Info (Optional)</h6>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Passport Number</label>
+                            <input type="text" name="passport_number" class="form-control" placeholder="Passport Number">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Date of Birth</label>
+                            <input type="date" name="date_of_birth" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Marital Status</label>
+                            <input type="text" name="marital_status" class="form-control" placeholder="Single / Married / etc.">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Religion</label>
+                            <input type="text" name="religion" class="form-control" placeholder="Religion">
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Nationality</label>
+                            <input type="text" name="nationality" class="form-control" placeholder="Nationality">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Emergency Contact</label>
+                            <input type="text" name="emergency_contact" class="form-control" placeholder="Emergency Phone Number">
+                        </div>
+                    </div>
+
+                    {{-- BANK INFO SECTION --}}
+                    <hr>
+                    <h6 class="fw-bold text-primary">Bank Info (Optional)</h6>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Bank Name</label>
+                            <input type="text" name="bank_name" class="form-control" placeholder="Bank Name">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Account Number</label>
+                            <input type="text" name="account_number" class="form-control" placeholder="Account Number">
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">IFSC Code</label>
+                            <input type="text" name="ifsc_code" class="form-control" placeholder="IFSC Code">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">PAN Number</label>
+                            <input type="text" name="pan_number" class="form-control" placeholder="PAN Number">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">UPI ID</label>
+                        <input type="text" name="upi_id" class="form-control" placeholder="example@bank">
                     </div>
                 </div>
 

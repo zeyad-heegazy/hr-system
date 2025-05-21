@@ -53,7 +53,7 @@
                                     <p>{{$employee->description}}</p>
                                 </div>
                                 <a href="{{ route('admin.project.tasks') }}" class="btn btn-dark btn-sm mt-1"><i class="icofont-plus-circle me-2 fs-6"></i>Add Task</a>
-                                <a href="{{ route('admin.our-employee.members-profile') }}" class="btn btn-dark btn-sm mt-1"><i class="icofont-invisible me-2 fs-6"></i>Profile</a>
+                                <a href="{{ route('admin.our-employee.members-profile', $employee->id) }}" class="btn btn-dark btn-sm mt-1"><i class="icofont-invisible me-2 fs-6"></i>Profile</a>
                             </div>
                         </div>
                     </div>

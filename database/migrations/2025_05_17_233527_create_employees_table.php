@@ -19,11 +19,11 @@ return new class extends Migration
             $table->string('employeeId')->unique();
             $table->string('user_name')->unique();
             $table->string('phone')->unique();
-            $table->unsignedBigInteger('department_id');
             $table->string('designation');
-            $table->string('description')->nullable();
-            $table->unsignedBigInteger('user_id');
+            $table->text('description')->nullable();
             $table->date('joining_date');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('department_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

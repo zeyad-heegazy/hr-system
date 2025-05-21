@@ -52,7 +52,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     // Employees
     Route::get('/our-employee/members', [EmployeeController::class ,'index'])->name('admin.our-employee.members');
     Route::post('/our-employee/members', [EmployeeController::class ,'store'])->name('admin.our-employee.store');
-    Route::get('/our-employee/members-profile', fn() => view('admin.our-employee.members-profile'))->name('admin.our-employee.members-profile');
+    Route::get('/our-employee/{id}/profile', [EmployeeController::class, "show"])->name('admin.our-employee.members-profile');
     Route::get('/our-employee/holidays', fn() => view('admin.our-employee.holidays'))->name('admin.our-employee.holidays');
     Route::get('/our-employee/attendance-employee', fn() => view('admin.our-employee.attendance-employee'))->name('admin.our-employee.attendance-employee');
     Route::get('/our-employee/attendance', fn() => view('admin.our-employee.attendance'))->name('admin.our-employee.attendance');
