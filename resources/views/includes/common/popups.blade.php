@@ -2,6 +2,7 @@
 $date = \Carbon\Carbon::now();
 $departments = \App\Models\Department::all();
 $employees = \App\Models\Employee::all();
+$projects = \App\Models\Project::all();
 ?>
 <!-- Add Department-->
 <div class="modal fade" id="depadd" tabindex="-1"  aria-hidden="true">
@@ -303,6 +304,92 @@ $employees = \App\Models\Employee::all();
                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done</button>
                  <button type="submit" class="btn btn-primary">Create</button>
               </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Create task-->
+<div class="modal fade" id="createtask" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+        <div class="modal-content" style="max-height: 70vh; overflow-y: scroll;">
+            <div class="modal-header">
+                <h5 class="modal-title  fw-bold" id="createprojectlLabel"> Create Task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="{{route('admin.project.task.store')}}" enctype="multipart/form-data">
+                @csrf
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Project Name</label>
+                    <select class="form-select"  name="project_id" aria-label="Default select Project Category">
+                        @foreach($projects as $project)
+                         <option value="{{$project->id}}">{{$project->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Task Category</label>
+                    <select class="form-select" name="category" aria-label="Default select Project Category">
+                        <option disabled selected>Select Category</option>
+                        <option value="UI/UX Design">UI/UX Design</option>
+                        <option value="Website Design">Website Design</option>
+                        <option value="App Development">App Development</option>
+                        <option value="Quality Assurance">Quality Assurance</option>
+                        <option value="Development">Development</option>
+                        <option value="Backend Development">Backend Development</option>
+                        <option value="Software Testing">Software Testing</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="SEO">SEO</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="formFileMultipleone" class="form-label">Task Images & Document</label>
+                    <input class="form-control" name="files" type="file" id="formFileMultipleone" multiple>
+                </div>
+                <div class="deadline-form mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <label class="form-label">Task Start Date</label>
+                                <input type="date" name="start_date" class="form-control">
+                            </div>
+                            <div class="col">
+                                <label  class="form-label">Task End Date</label>
+                                <input type="date" name="end_date" class="form-control" >
+                            </div>
+                        </div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-sm">
+                        <label class="form-label">Task Assign Person</label>
+                        <select class="form-select" name="employee_id" aria-label="Default select Priority">
+                            @foreach($employees as $employee)
+                                <option value="{{$employee->id}}">{{$employee->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-sm">
+                        <label class="form-label">Task Priority</label>
+                        <select class="form-select" name="priority" aria-label="Default select Priority">
+                            <option value="Highest" selected>Highest</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                            <option value="Lowest">Lowest</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea786" class="form-label">Description (optional)</label>
+                    <textarea class="form-control" name="description" id="exampleFormControlTextarea786" rows="3" placeholder="Add any extra details about the request"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done</button>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
             </form>
         </div>
     </div>

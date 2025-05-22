@@ -210,21 +210,20 @@
                             <div class="progress_task">
                                 <div class="dd" data-plugin="nestable">
                                     <ol class="dd-list" id="in-progress">
-                                        <li class="dd-item" data-id="1">
+                                        @foreach($inProgressTasks as $task)
+                                        <li class="dd-item" data-id="{{$task->id}}">
                                             <div class="dd-handle">
                                                 <div class="task-info d-flex align-items-center justify-content-between">
-                                                    <h6 class="light-success-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">Quality Assurance
+                                                    <h6 class="light-success-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">{{$task->category}}
                                                     </h6>
                                                     <div class="task-priority d-flex flex-column align-items-center justify-content-center">
                                                         <div class="avatar-list avatar-list-stacked m-0">
-                                                            <img class="avatar rounded-circle small-avt" src="{{ url('/').'/images/xs/avatar2.jpg' }}" alt="">
-                                                            <img class="avatar rounded-circle small-avt" src="{{ url('/').'/images/xs/avatar1.jpg' }}" alt="">
+                                                            <img class="avatar rounded-circle small-avt" src="{{ asset("storage/". $task->employee->image) }}" alt="">
                                                         </div>
-                                                        <span class="badge bg-warning text-end mt-2">MEDIUM</span>
+                                                        <span class="badge bg-warning text-end mt-2">{{$task->priority}}</span>
                                                     </div>
                                                 </div>
-                                                <p class="py-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id
-                                                    nec scelerisque massa.</p>
+                                                <p class="py-2 mb-0">{{$task->description}}</p>
                                                 <div class="tikit-info row g-3 align-items-center">
                                                     <div class="col-sm">
                                                         <ul class="d-flex list-unstyled align-items-center flex-wrap">
@@ -234,14 +233,6 @@
                                                                     <span class="ms-1">28 Mar</span>
                                                                 </div>
                                                             </li>
-                                                            <li class="me-2">
-                                                                <div class="d-flex align-items-center">
-
-                                                                    <i class="icofont-ui-text-chat"></i>
-                                                                    <span class="ms-1">5</span>
-
-                                                                </div>
-                                                            </li>
                                                             <li>
                                                                 <div class="d-flex align-items-center">
                                                                     <i class="icofont-paper-clip"></i>
@@ -252,12 +243,13 @@
                                                     </div>
                                                     <div class="col-sm text-end">
 
-                                                        <div class="small text-truncate light-danger-bg py-1 px-2 rounded-1 d-inline-block fw-bold small"> Box of Crayons </div>
+                                                        <div class="small text-truncate light-danger-bg py-1 px-2 rounded-1 d-inline-block fw-bold small"> {{$task->project->name}} </div>
                                                     </div>
                                                 </div>
                                             </div>
 
                                         </li>
+                                        @endforeach
                                     </ol>
                                 </div>
                             </div>
@@ -267,100 +259,46 @@
                             <div class="review_task">
                                 <div class="dd" data-plugin="nestable">
                                     <ol class="dd-list" id="needs-review">
-                                        <li class="dd-item" data-id="2">
-                                            <div class="dd-handle">
-                                                <div class="task-info d-flex align-items-center justify-content-between">
-                                                    <h6 class="light-info-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">UI/UX Design</h6>
-                                                    <div class="task-priority d-flex flex-column align-items-center justify-content-center">
-                                                        <div class="avatar-list avatar-list-stacked m-0">
-                                                            <img class="avatar rounded-circle small-avt" src="{{ url('/').'/images/xs/avatar3.jpg' }}" alt="">
-                                                            <img class="avatar rounded-circle small-avt" src="{{ url('/').'/images/xs/avatar1.jpg' }}" alt="">
+                                        @foreach($needsReviewTasks as $task)
+                                            <li class="dd-item" data-id="{{$task->id}}">
+                                                <div class="dd-handle">
+                                                    <div class="task-info d-flex align-items-center justify-content-between">
+                                                        <h6 class="light-success-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">{{$task->category}}
+                                                        </h6>
+                                                        <div class="task-priority d-flex flex-column align-items-center justify-content-center">
+                                                            <div class="avatar-list avatar-list-stacked m-0">
+                                                                <img class="avatar rounded-circle small-avt" src="{{ asset("storage/". $task->employee->image) }}" alt="">
+                                                            </div>
+                                                            <span class="badge bg-warning text-end mt-2">{{$task->priority}}</span>
                                                         </div>
-                                                        <span class="badge bg-warning text-end mt-2">MEDIUM</span>
                                                     </div>
-                                                </div>
-                                                <p class="py-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id
-                                                    nec scelerisque massa.</p>
-                                                <div class="tikit-info row g-3 align-items-center">
-                                                    <div class="col-sm">
-                                                        <ul class="d-flex list-unstyled align-items-center flex-wrap">
-                                                            <li class="me-2">
-                                                                <div class="d-flex align-items-center">
-                                                                    <i class="icofont-flag"></i>
-                                                                    <span class="ms-1">03 Apr</span>
-                                                                </div>
-                                                            </li>
-                                                            <li class="me-2">
-                                                                <div class="d-flex align-items-center">
-
-                                                                    <i class="icofont-ui-text-chat"></i>
-                                                                    <span class="ms-1">7</span>
-
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="d-flex align-items-center">
-                                                                    <i class="icofont-paper-clip"></i>
-                                                                    <span class="ms-1">2</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-sm text-end">
-
-                                                        <div class="small text-truncate light-danger-bg py-1 px-2 rounded-1 d-inline-block fw-bold small"> Social Geek Made </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </li>
-                                        <li class="dd-item" data-id="3">
-                                            <div class="dd-handle">
-                                                <div class="task-info d-flex align-items-center justify-content-between">
-                                                    <h6 class="light-info-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">UI/UX Design</h6>
-                                                    <div class="task-priority d-flex flex-column align-items-center justify-content-center">
-                                                        <div class="avatar-list avatar-list-stacked m-0">
-                                                            <img class="avatar rounded-circle small-avt" src="{{ url('/').'/images/xs/avatar3.jpg' }}" alt="">
-                                                            <img class="avatar rounded-circle small-avt" src="{{ url('/').'/images/xs/avatar1.jpg' }}" alt="">
+                                                    <p class="py-2 mb-0">{{$task->description}}</p>
+                                                    <div class="tikit-info row g-3 align-items-center">
+                                                        <div class="col-sm">
+                                                            <ul class="d-flex list-unstyled align-items-center flex-wrap">
+                                                                <li class="me-2">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <i class="icofont-flag"></i>
+                                                                        <span class="ms-1">28 Mar</span>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <i class="icofont-paper-clip"></i>
+                                                                        <span class="ms-1">5</span>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
                                                         </div>
-                                                        <span class="badge bg-warning text-end mt-2">MEDIUM</span>
+                                                        <div class="col-sm text-end">
+
+                                                            <div class="small text-truncate light-danger-bg py-1 px-2 rounded-1 d-inline-block fw-bold small"> {{$task->project->name}} </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <p class="py-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id
-                                                    nec scelerisque massa.</p>
-                                                <div class="tikit-info row g-3 align-items-center">
-                                                    <div class="col-sm">
-                                                        <ul class="d-flex list-unstyled align-items-center flex-wrap">
-                                                            <li class="me-2">
-                                                                <div class="d-flex align-items-center">
-                                                                    <i class="icofont-flag"></i>
-                                                                    <span class="ms-1">03 Apr</span>
-                                                                </div>
-                                                            </li>
-                                                            <li class="me-2">
-                                                                <div class="d-flex align-items-center">
 
-                                                                    <i class="icofont-ui-text-chat"></i>
-                                                                    <span class="ms-1">7</span>
-
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="d-flex align-items-center">
-                                                                    <i class="icofont-paper-clip"></i>
-                                                                    <span class="ms-1">2</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-sm text-end">
-
-                                                        <div class="small text-truncate light-danger-bg py-1 px-2 rounded-1 d-inline-block fw-bold small"> Social Geek Made </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </li>
+                                            </li>
+                                        @endforeach
                                     </ol>
                                 </div>
                             </div>
@@ -370,100 +308,46 @@
                             <div class="completed_task">
                                 <div class="dd" data-plugin="nestable">
                                     <ol class="dd-list" id="completed">
-                                        <li class="dd-item" data-id="4">
-                                            <div class="dd-handle">
-                                                <div class="task-info d-flex align-items-center justify-content-between">
-                                                    <h6 class="light-info-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">UI/UX Design</h6>
-                                                    <div class="task-priority d-flex flex-column align-items-center justify-content-center">
-                                                        <div class="avatar-list avatar-list-stacked m-0">
-                                                            <img class="avatar rounded-circle small-avt" src="{{ url('/').'/images/xs/avatar6.jpg' }}" alt="">
-                                                            <img class="avatar rounded-circle small-avt" src="{{ url('/').'/images/xs/avatar7.jpg' }}" alt="">
+                                        @foreach($completedTasks as $task)
+                                            <li class="dd-item" data-id="{{$task->id}}">
+                                                <div class="dd-handle">
+                                                    <div class="task-info d-flex align-items-center justify-content-between">
+                                                        <h6 class="light-success-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">{{$task->category}}
+                                                        </h6>
+                                                        <div class="task-priority d-flex flex-column align-items-center justify-content-center">
+                                                            <div class="avatar-list avatar-list-stacked m-0">
+                                                                <img class="avatar rounded-circle small-avt" src="{{ asset("storage/". $task->employee->image) }}" alt="">
+                                                            </div>
+                                                            <span class="badge bg-warning text-end mt-2">{{$task->priority}}</span>
                                                         </div>
-                                                        <span class="badge bg-warning text-end mt-2">MEDIUM</span>
                                                     </div>
-                                                </div>
-                                                <p class="py-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id
-                                                    nec scelerisque massa.</p>
-                                                <div class="tikit-info row g-3 align-items-center">
-                                                    <div class="col-sm">
-                                                        <ul class="d-flex list-unstyled align-items-center flex-wrap">
-                                                            <li class="me-2">
-                                                                <div class="d-flex align-items-center">
-                                                                    <i class="icofont-flag"></i>
-                                                                    <span class="ms-1">13 Jan</span>
-                                                                </div>
-                                                            </li>
-                                                            <li class="me-2">
-                                                                <div class="d-flex align-items-center">
-
-                                                                    <i class="icofont-ui-text-chat"></i>
-                                                                    <span class="ms-1">4</span>
-
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="d-flex align-items-center">
-                                                                    <i class="icofont-paper-clip"></i>
-                                                                    <span class="ms-1">1</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-sm text-end">
-
-                                                        <div class="small text-truncate light-danger-bg py-1 px-2 rounded-1 d-inline-block fw-bold small"> Social Geek Made </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </li>
-                                        <li class="dd-item" data-id="5">
-                                            <div class="dd-handle">
-                                                <div class="task-info d-flex align-items-center justify-content-between">
-                                                    <h6 class="light-info-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">UI/UX Design</h6>
-                                                    <div class="task-priority d-flex flex-column align-items-center justify-content-center">
-                                                        <div class="avatar-list avatar-list-stacked m-0">
-                                                            <img class="avatar rounded-circle small-avt" src="{{ url('/').'/images/xs/avatar6.jpg' }}" alt="">
-                                                            <img class="avatar rounded-circle small-avt" src="{{ url('/').'/images/xs/avatar7.jpg' }}" alt="">
+                                                    <p class="py-2 mb-0">{{$task->description}}</p>
+                                                    <div class="tikit-info row g-3 align-items-center">
+                                                        <div class="col-sm">
+                                                            <ul class="d-flex list-unstyled align-items-center flex-wrap">
+                                                                <li class="me-2">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <i class="icofont-flag"></i>
+                                                                        <span class="ms-1">28 Mar</span>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <i class="icofont-paper-clip"></i>
+                                                                        <span class="ms-1">5</span>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
                                                         </div>
-                                                        <span class="badge bg-warning text-end mt-2">MEDIUM</span>
+                                                        <div class="col-sm text-end">
+
+                                                            <div class="small text-truncate light-danger-bg py-1 px-2 rounded-1 d-inline-block fw-bold small"> {{$task->project->name}} </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <p class="py-2 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id
-                                                    nec scelerisque massa.</p>
-                                                <div class="tikit-info row g-3 align-items-center">
-                                                    <div class="col-sm">
-                                                        <ul class="d-flex list-unstyled align-items-center flex-wrap">
-                                                            <li class="me-2">
-                                                                <div class="d-flex align-items-center">
-                                                                    <i class="icofont-flag"></i>
-                                                                    <span class="ms-1">13 Jan</span>
-                                                                </div>
-                                                            </li>
-                                                            <li class="me-2">
-                                                                <div class="d-flex align-items-center">
 
-                                                                    <i class="icofont-ui-text-chat"></i>
-                                                                    <span class="ms-1">4</span>
-
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="d-flex align-items-center">
-                                                                    <i class="icofont-paper-clip"></i>
-                                                                    <span class="ms-1">1</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-sm text-end">
-
-                                                        <div class="small text-truncate light-danger-bg py-1 px-2 rounded-1 d-inline-block fw-bold small"> Social Geek Made </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </li>
+                                            </li>
+                                        @endforeach
                                     </ol>
                                 </div>
                             </div>

@@ -12,8 +12,15 @@ class TaskController extends Controller
      */
     public function index()
     {
-//        $tasks = Task::all();
-        return view('admin.project.tasks');
+        $inProgressTasks = Task::where('status', 'in-progress')->get();
+        $needsReviewTasks = Task::where('status', 'needs-review')->get();
+        $completedTasks = Task::where('status', 'completed')->get();
+
+        return view('admin.project.tasks', compact(
+            'inProgressTasks',
+            'needsReviewTasks',
+            'completedTasks'
+        ));
     }
 
     /**
@@ -29,7 +36,25 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $storedFiles = [];
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $file) {
+                $storedFiles[] = $file->store('tasks/files', 'public');
+            }
+        }
+
+        Task::create([
+            'project_id' => $request['project_id'],
+            'category' => $request['category'],
+            'description' => $request['description'] ?? null,
+            'start_date' => $request['start_date'],
+            'end_date' => $request['end_date'],
+            'employee_id' => $request['employee_id'],
+            'priority' => $request['priority'],
+            'files' => json_encode($storedFiles),
+        ]);
+
+        return redirect()->back()->with('success', 'Task created successfully.');
     }
 
     /**
