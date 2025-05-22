@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 
 Route::get('/', function () {
     return redirect()->route('admin.dashboard');
@@ -31,7 +32,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/project/index', [ProjectController::class, 'index'])->name('admin.project.index');
     Route::post('/project/store', [ProjectController::class, 'store'])->name('admin.project.store');
     Route::delete('/project/destroy/{id}', [ProjectController::class, 'destroy'])->name('admin.project.destroy');
-    Route::get('/project/tasks', fn() => view('admin.project.tasks'))->name('admin.project.tasks');
+    Route::get('/project/tasks', [TaskController::class, 'index'])->name('admin.project.tasks.index');
     Route::get('/project/timesheet', fn() => view('admin.project.timesheet'))->name('admin.project.timesheet');
     Route::get('/project/leaders', fn() => view('admin.project.leaders'))->name('admin.project.leaders');
     Route::get('/project-dashboard', fn() => view('admin.project.dashboard'))->name('admin.project');

@@ -37,7 +37,7 @@
                 <!-- Menu: Sub menu ul -->
                 <ul class="sub-menu {{ Request::segment(2)=='project' ? 'collapsed show' : 'collapse' }}" id="project-Components">
                     <li><a class="ms-link {{ Request::segment(3)=='index' ? 'active' : '' }}" href="{{ route('admin.project.index') }}"><span>Projects</span></a></li>
-                    <li><a class="ms-link {{ Request::segment(3)=='tasks' ? 'active' : '' }}" href="{{ route('admin.project.tasks') }}"><span>Tasks</span></a></li>
+                    <li><a class="ms-link {{ Request::segment(3)=='tasks' ? 'active' : '' }}" href="{{ route('admin.project.tasks.index') }}"><span>Tasks</span></a></li>
                     <li><a class="ms-link {{ Request::segment(3)=='timesheet' ? 'active' : '' }}" href="{{ route('admin.project.timesheet') }}"><span>Timesheet</span></a></li>
                     <li><a class="ms-link {{ Request::segment(3)=='leaders' ? 'active' : '' }}" href="{{ route('admin.project.leaders') }}"><span>Leaders</span></a></li>
                 </ul>
