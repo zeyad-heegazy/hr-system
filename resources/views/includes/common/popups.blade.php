@@ -230,7 +230,7 @@ $employees = \App\Models\Employee::all();
                 <h5 class="modal-title  fw-bold" id="createprojectlLabel"> Create Project</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action="{{route('admin.project.store')}}">
+            <form method="POST" action="{{route('admin.project.store')}}" enctype="multipart/form-data">
                 @csrf
               <div class="modal-body">
                 <div class="mb-3">
@@ -239,23 +239,23 @@ $employees = \App\Models\Employee::all();
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Project Category</label>
-                    <select class="form-select" name="category" aria-label="Default select Project Category">
-                        <option selected>UI/UX Design</option>
-                        <option value="1">Website Design</option>
-                        <option value="2">App Development</option>
-                        <option value="3">Quality Assurance</option>
-                        <option value="4">Development</option>
-                        <option value="5">Backend Development</option>
-                        <option value="6">Software Testing</option>
-                        <option value="7">Website Design</option>
-                        <option value="8">Marketing</option>
-                        <option value="9">SEO</option>
-                        <option value="10">Other</option>
-                    </select>
+                        <select name="category" class="form-select" required>
+                            <option disabled selected>Select Category</option>
+                            <option value="UI/UX Design">UI/UX Design</option>
+                            <option value="Website Design">Website Design</option>
+                            <option value="App Development">App Development</option>
+                            <option value="Quality Assurance">Quality Assurance</option>
+                            <option value="Development">Development</option>
+                            <option value="Backend Development">Backend Development</option>
+                            <option value="Software Testing">Software Testing</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="SEO">SEO</option>
+                            <option value="Other">Other</option>
+                        </select>
                 </div>
                 <div class="mb-3">
                     <label for="formFileMultipleone" class="form-label">Project Images & Document</label>
-                    <input class="form-control" name="files[]" type="file" id="formFileMultipleone" multiple>
+                    <input class="form-control" name="files" type="file" id="formFileMultipleone" multiple>
                 </div>
                 <div class="deadline-form">
                         <div class="row g-3 mb-3">

@@ -30,6 +30,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     // Project routes
     Route::get('/project/index', [ProjectController::class, 'index'])->name('admin.project.index');
     Route::post('/project/store', [ProjectController::class, 'store'])->name('admin.project.store');
+    Route::delete('/project/destroy/{id}', [ProjectController::class, 'destroy'])->name('admin.project.destroy');
     Route::get('/project/tasks', fn() => view('admin.project.tasks'))->name('admin.project.tasks');
     Route::get('/project/timesheet', fn() => view('admin.project.timesheet'))->name('admin.project.timesheet');
     Route::get('/project/leaders', fn() => view('admin.project.leaders'))->name('admin.project.leaders');

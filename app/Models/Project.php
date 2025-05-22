@@ -10,6 +10,10 @@ class Project extends Model
 {
     protected $guarded = [];
 
+    protected $casts = [
+        'files' => 'array',
+    ];
+
     public function lead(): BelongsTo
     {
         return $this->belongsTo(Employee::class, 'lead_employee_id');

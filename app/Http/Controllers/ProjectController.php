@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -29,7 +30,6 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->file('files[]'));
         $storedFiles = [];
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
@@ -87,8 +87,19 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project)
+    public function destroy(int $id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $filesArray = json_decode($project->files ?? '[]');
+        foreach ($filesArray as $file) {
+            if (!empty($file)) {
+                Storage::delete($file);
+            }
+        }
+        if($project->icon !== null){
+            Storage::delete($project->icon);
+        }
+        $project->delete();
+        return redirect()->back()->with('success', 'Project deleted successfully.');
     }
 }
