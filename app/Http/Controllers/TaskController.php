@@ -12,11 +12,13 @@ class TaskController extends Controller
      */
     public function index()
     {
+        $tasks = Task::all();
         $inProgressTasks = Task::where('status', 'in-progress')->get();
         $needsReviewTasks = Task::where('status', 'needs-review')->get();
         $completedTasks = Task::where('status', 'completed')->get();
 
         return view('admin.project.tasks', compact(
+            'tasks',
             'inProgressTasks',
             'needsReviewTasks',
             'completedTasks'
@@ -79,6 +81,19 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         //
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $task = Task::findOrFail($request->id);
+        $task->status = $request->status;
+        $task->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Status updated successfully',
+            'task' => $task
+        ]);
     }
 
     /**

@@ -18,14 +18,14 @@ return new class extends Migration
             $table->json('files')->nullable();
             $table->date('start_date');
             $table->date('end_date');
-            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('employee_id')->nullable();
             $table->string('priority');
             $table->string('status')->default('in-progress');
             $table->text('description')->nullable();
             $table->timestamps();
 
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
-            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('set null');
         });
     }
 

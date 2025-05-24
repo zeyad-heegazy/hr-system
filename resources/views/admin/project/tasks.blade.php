@@ -122,105 +122,59 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="flex-grow-1 mem-list">
+                                        @foreach($tasks as $task)
                                         <div class="py-2 d-flex align-items-center border-bottom">
-
                                             <div class="d-flex ms-2 align-items-center flex-fill">
-                                                <img src="{{ url('/').'/images/xs/avatar6.jpg' }}" class="avatar lg rounded-circle img-thumbnail" alt="avatar">
+                                                <img src="{{ asset('storage/') . '/' .$task->employee->image }}" class="avatar lg rounded-circle img-thumbnail" alt="avatar">
                                                 <div class="d-flex flex-column ps-2">
-                                                    <h6 class="fw-bold mb-0">Lucinda Massey</h6>
-                                                    <span class="small text-muted">Ui/UX Designer</span>
+                                                    <h6 class="fw-bold mb-0">{{$task->employee->name}}</h6>
+                                                    <span class="small text-muted">{{$task->employee->designation}}</span>
                                                 </div>
                                             </div>
                                             <button type="button" class="btn light-danger-bg text-end" data-bs-toggle="modal" data-bs-target="#dremovetask">Remove</button>
                                         </div>
-                                        <div class="py-2 d-flex align-items-center border-bottom">
-
-                                            <div class="d-flex ms-2 align-items-center flex-fill">
-                                                <img src="{{ url('/').'/images/xs/avatar4.jpg' }}" class="avatar lg rounded-circle img-thumbnail" alt="avatar">
-                                                <div class="d-flex flex-column ps-2">
-                                                    <h6 class="fw-bold mb-0">Ryan Nolan</h6>
-                                                    <span class="small text-muted">Website Designer</span>
-                                                </div>
-                                            </div>
-                                            <button type="button" class="btn light-danger-bg text-end" data-bs-toggle="modal" data-bs-target="#dremovetask">Remove</button>
-                                        </div>
-                                        <div class="py-2 d-flex align-items-center border-bottom">
-
-                                            <div class="d-flex ms-2 align-items-center flex-fill">
-                                                <img src="{{ url('/').'/images/xs/avatar9.jpg' }}" class="avatar lg rounded-circle img-thumbnail" alt="avatar">
-                                                <div class="d-flex flex-column ps-2">
-                                                    <h6 class="fw-bold mb-0">Oliver	Black</h6>
-                                                    <span class="small text-muted">App Developer</span>
-                                                </div>
-                                            </div>
-                                            <button type="button" class="btn light-danger-bg text-end" data-bs-toggle="modal" data-bs-target="#dremovetask">Remove</button>
-                                        </div>
-                                        <div class="py-2 d-flex align-items-center border-bottom">
-
-                                            <div class="d-flex ms-2 align-items-center flex-fill">
-                                                <img src="{{ url('/').'/images/xs/avatar10.jpg' }}" class="avatar lg rounded-circle img-thumbnail" alt="avatar">
-                                                <div class="d-flex flex-column ps-2">
-                                                    <h6 class="fw-bold mb-0">Adam Walker</h6>
-                                                    <span class="small text-muted">Quality Checker</span>
-                                                </div>
-                                            </div>
-                                            <button type="button" class="btn light-danger-bg text-end">Remove</button>
-                                        </div>
-                                        <div class="py-2 d-flex align-items-center border-bottom">
-
-                                            <div class="d-flex ms-2 align-items-center flex-fill">
-                                                <img src="{{ url('/').'/images/xs/avatar4.jpg' }}" class="avatar lg rounded-circle img-thumbnail" alt="avatar">
-                                                <div class="d-flex flex-column ps-2">
-                                                    <h6 class="fw-bold mb-0">Brian Skinner</h6>
-                                                    <span class="small text-muted">Quality Checker</span>
-                                                </div>
-                                            </div>
-                                            <button type="button" class="btn light-danger-bg text-end" data-bs-toggle="modal" data-bs-target="#dremovetask">Remove</button>
-                                        </div>
-                                        <div class="py-2 d-flex align-items-center border-bottom">
-
-                                            <div class="d-flex ms-2 align-items-center flex-fill">
-                                                <img src="{{ url('/').'/images/xs/avatar11.jpg' }}" class="avatar lg rounded-circle img-thumbnail" alt="avatar">
-                                                <div class="d-flex flex-column ps-2">
-                                                    <h6 class="fw-bold mb-0">Dan Short</h6>
-                                                    <span class="small text-muted">App Developer</span>
-                                                </div>
-                                            </div>
-                                            <button type="button" class="btn light-danger-bg text-end" data-bs-toggle="modal" data-bs-target="#dremovetask">Remove</button>
-                                        </div>
-                                        <div class="py-2 d-flex align-items-center border-bottom">
-
-                                            <div class="d-flex ms-2 align-items-center flex-fill">
-                                                <img src="{{ url('/').'/images/xs/avatar3.jpg' }}" class="avatar lg rounded-circle img-thumbnail" alt="avatar">
-                                                <div class="d-flex flex-column ps-2">
-                                                    <h6 class="fw-bold mb-0">Jack Glover</h6>
-                                                    <span class="small text-muted">Ui/UX Designer</span>
-                                                </div>
-                                            </div>
-                                            <button type="button" class="btn light-danger-bg text-end" data-bs-toggle="modal" data-bs-target="#dremovetask">Remove</button>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div> <!-- .card: My Timeline -->
                         </div>
                     </div>
                     <div class="row taskboard g-3 py-xxl-4">
-                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 mt-xxl-4 mt-xl-4 mt-lg-4 mt-md-4 mt-sm-4 mt-4">
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 mt-xxl-4 mt-xl-4 mt-lg-4 mt-md-4 mt-sm-4 mt-4"  id="in-progress">
                             <h6 class="fw-bold py-3 mb-0">In Progress</h6>
                             <div class="progress_task">
                                 <div class="dd" data-plugin="nestable">
-                                    <ol class="dd-list" id="in-progress">
+                                    <ol class="dd-list">
                                         @foreach($inProgressTasks as $task)
                                         <li class="dd-item" data-id="{{$task->id}}">
                                             <div class="dd-handle">
                                                 <div class="task-info d-flex align-items-center justify-content-between">
-                                                    <h6 class="light-success-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">{{$task->category}}
+                                                    @php
+                                                        $bgClasses = [
+                                                            'light-success-bg',
+                                                            'light-danger-bg',
+                                                            'light-info-bg',
+                                                            'light-warning-bg',
+                                                            'light-primary-bg',
+                                                            'light-secondary-bg',
+                                                        ];
+                                                        $randomBg = $bgClasses[array_rand($bgClasses)];
+                                                    @endphp
+                                                    <h6 class="{{ $randomBg }} py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">{{$task->category}}
                                                     </h6>
                                                     <div class="task-priority d-flex flex-column align-items-center justify-content-center">
                                                         <div class="avatar-list avatar-list-stacked m-0">
                                                             <img class="avatar rounded-circle small-avt" src="{{ asset("storage/". $task->employee->image) }}" alt="">
                                                         </div>
-                                                        <span class="badge bg-warning text-end mt-2">{{$task->priority}}</span>
+                                                            @php
+                                                                $priorityClass = match(strtolower($task->priority)) {
+                                                                    'low' => 'bg-success',
+                                                                    'medium' => 'bg-warning',
+                                                                    'high', 'highest' => 'bg-danger',
+                                                                    default => 'bg-secondary',
+                                                                };
+                                                            @endphp
+                                                        <span class="badge {{ $priorityClass }} text-end mt-2">{{$task->priority}}</span>
                                                     </div>
                                                 </div>
                                                 <p class="py-2 mb-0">{{$task->description}}</p>
@@ -254,22 +208,41 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 mt-xxl-4 mt-xl-4 mt-lg-4 mt-md-0 mt-sm-0 mt-0">
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 mt-xxl-4 mt-xl-4 mt-lg-4 mt-md-0 mt-sm-0 mt-0" id="needs-review">
                             <h6 class="fw-bold py-3 mb-0">Needs Review</h6>
                             <div class="review_task">
                                 <div class="dd" data-plugin="nestable">
-                                    <ol class="dd-list" id="needs-review">
+                                    <ol class="dd-list" >
                                         @foreach($needsReviewTasks as $task)
                                             <li class="dd-item" data-id="{{$task->id}}">
                                                 <div class="dd-handle">
                                                     <div class="task-info d-flex align-items-center justify-content-between">
-                                                        <h6 class="light-success-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">{{$task->category}}
+                                                        @php
+                                                            $bgClasses = [
+                                                                'light-success-bg',
+                                                                'light-danger-bg',
+                                                                'light-info-bg',
+                                                                'light-warning-bg',
+                                                                'light-primary-bg',
+                                                                'light-secondary-bg',
+                                                            ];
+                                                            $randomBg = $bgClasses[array_rand($bgClasses)];
+                                                        @endphp
+                                                        <h6 class="{{ $randomBg }} py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">{{$task->category}}
                                                         </h6>
                                                         <div class="task-priority d-flex flex-column align-items-center justify-content-center">
                                                             <div class="avatar-list avatar-list-stacked m-0">
                                                                 <img class="avatar rounded-circle small-avt" src="{{ asset("storage/". $task->employee->image) }}" alt="">
                                                             </div>
-                                                            <span class="badge bg-warning text-end mt-2">{{$task->priority}}</span>
+                                                            @php
+                                                                $priorityClass = match(strtolower($task->priority)) {
+                                                                    'low' => 'bg-success',
+                                                                    'medium' => 'bg-warning',
+                                                                    'high', 'highest' => 'bg-danger',
+                                                                    default => 'bg-secondary',
+                                                                };
+                                                            @endphp
+                                                            <span class="badge {{ $priorityClass }} text-end mt-2">{{$task->priority}}</span>
                                                         </div>
                                                     </div>
                                                     <p class="py-2 mb-0">{{$task->description}}</p>
@@ -303,22 +276,41 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 mt-xxl-4 mt-xl-4 mt-lg-4 mt-md-0 mt-sm-0 mt-0">
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 mt-xxl-4 mt-xl-4 mt-lg-4 mt-md-0 mt-sm-0 mt-0" id="completed">
                             <h6 class="fw-bold py-3 mb-0">Completed</h6>
                             <div class="completed_task">
                                 <div class="dd" data-plugin="nestable">
-                                    <ol class="dd-list" id="completed">
+                                    <ol class="dd-list" >
                                         @foreach($completedTasks as $task)
                                             <li class="dd-item" data-id="{{$task->id}}">
                                                 <div class="dd-handle">
                                                     <div class="task-info d-flex align-items-center justify-content-between">
-                                                        <h6 class="light-success-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">{{$task->category}}
+                                                        @php
+                                                            $bgClasses = [
+                                                                'light-success-bg',
+                                                                'light-danger-bg',
+                                                                'light-info-bg',
+                                                                'light-warning-bg',
+                                                                'light-primary-bg',
+                                                                'light-secondary-bg',
+                                                            ];
+                                                            $randomBg = $bgClasses[array_rand($bgClasses)];
+                                                        @endphp
+                                                        <h6 class="{{ $randomBg }} py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">{{$task->category}}
                                                         </h6>
                                                         <div class="task-priority d-flex flex-column align-items-center justify-content-center">
                                                             <div class="avatar-list avatar-list-stacked m-0">
                                                                 <img class="avatar rounded-circle small-avt" src="{{ asset("storage/". $task->employee->image) }}" alt="">
                                                             </div>
-                                                            <span class="badge bg-warning text-end mt-2">{{$task->priority}}</span>
+                                                            @php
+                                                                $priorityClass = match(strtolower($task->priority)) {
+                                                                    'low' => 'bg-success',
+                                                                    'medium' => 'bg-warning',
+                                                                    'high', 'highest' => 'bg-danger',
+                                                                    default => 'bg-secondary',
+                                                                };
+                                                            @endphp
+                                                            <span class="badge {{ $priorityClass }} text-end mt-2">{{$task->priority}}</span>
                                                         </div>
                                                     </div>
                                                     <p class="py-2 mb-0">{{$task->description}}</p>
@@ -368,17 +360,43 @@
         const columns = ['in-progress', 'needs-review', 'completed'];
 
         columns.forEach((id) => {
-            new Sortable(document.getElementById(id), {
-                group: 'tasks-kanban',
+            const element = document.getElementById(id);
+            if(!element) return;
+            new Sortable(element, {
+                group: 'shared',
                 animation: 150,
-                ghostClass: 'sortable-ghost',
+                sort:false,
+                ghostClass: 'bg-red-900',
                 onEnd: function (evt) {
                     const itemId = evt.item.dataset.id;
                     const newColumn = evt.to.id;
 
-                    // send an AJAX request to update the item's status
-                    console.log(`Moved item #${itemId} to ${newColumn}`);
-                    // TODO: POST to backend with itemId and newColumn
+                    const lastItem = evt.to.querySelector('.dd-item:last-child');
+                    const lastItemId = lastItem ? lastItem.dataset.id : null;
+
+                    fetch("{{ route('admin.project.task.update-status') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                        body: JSON.stringify({
+                            id: lastItemId,
+                            status: newColumn
+                        })
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                console.log(`Task ${lastItemId} moved to ${newColumn}`);
+                            } else {
+                                alert('Failed to update task status');
+                            }
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            alert('Error while updating status');
+                        });
                 }
             });
         });
