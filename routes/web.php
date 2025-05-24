@@ -36,7 +36,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/project/tasks', [TaskController::class, 'store'])->name('admin.project.task.store');
     Route::post('/project/task/update-status', [TaskController::class, 'updateStatus'])->name('admin.project.task.update-status');
     Route::get('/project/timesheet', [ProjectController::class, 'indexTimesheet'])->name('admin.project.timesheet');
-    Route::get('/project/leaders', fn() => view('admin.project.leaders'))->name('admin.project.leaders');
+    Route::get('/project/leaders', [ProjectController::class, 'indexLeaders'])->name('admin.project.leaders');
     Route::get('/project-dashboard', fn() => view('admin.project.dashboard'))->name('admin.project');
 
     // HR Dashboard route

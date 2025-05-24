@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,15 +20,14 @@ class ProjectController extends Controller
 
     public function indexTimesheet()
     {
+        // Todo add timesheet to each project
         return view('admin.project.timesheet');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function indexLeaders()
     {
-
+        $projects = Project::with(['lead'])->withCount('tasks')->get();
+        return view('admin.project.leaders', compact('projects'));
     }
 
     /**
@@ -69,14 +69,6 @@ class ProjectController extends Controller
      * Display the specified resource.
      */
     public function show(Project $project)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Project $project)
     {
         //
     }

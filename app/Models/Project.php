@@ -19,6 +19,11 @@ class Project extends Model
         return $this->belongsTo(Employee::class, 'lead_employee_id');
     }
 
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
     public function getTimeLeftAttribute(): string
     {
         if (!$this->start_date || !$this->end_date) {
