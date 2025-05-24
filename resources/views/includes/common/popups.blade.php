@@ -394,3 +394,33 @@ $projects = \App\Models\Project::all();
         </div>
     </div>
 </div>
+
+
+<!-- Add Holiday-->
+<div class="modal fade" id="addholiday" tabindex="-1"  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title  fw-bold" id="addholidayLabel"> Add Holidays</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="{{route('admin.our-employee.holidays.store')}}">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label  class="form-label">Holiday Name</label>
+                        <input type="text" name="name" class="form-control"  placeholder="Republic Day">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput2778" class="form-label">Holiday Date</label>
+                        <input type="date" name="date" class="form-control" id="exampleFormControlInput2778">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
