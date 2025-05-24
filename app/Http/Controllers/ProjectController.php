@@ -17,6 +17,11 @@ class ProjectController extends Controller
         return view('admin.project.project', compact('projects'));
     }
 
+    public function indexTimesheet()
+    {
+        return view('admin.project.timesheet');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
