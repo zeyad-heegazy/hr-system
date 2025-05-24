@@ -140,221 +140,198 @@
                         </div>
                     </div>
                     <div class="row taskboard g-3 py-xxl-4">
-                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 mt-xxl-4 mt-xl-4 mt-lg-4 mt-md-4 mt-sm-4 mt-4"  id="in-progress">
-                            <h6 class="fw-bold py-3 mb-0">In Progress</h6>
-                            <div class="progress_task">
-                                <div class="dd" data-plugin="nestable">
-                                    <ol class="dd-list">
-                                        @foreach($inProgressTasks as $task)
-                                        <li class="dd-item" data-id="{{$task->id}}">
-                                            <div class="dd-handle">
-                                                <div class="task-info d-flex align-items-center justify-content-between">
-                                                    @php
-                                                        $bgClasses = [
-                                                            'light-success-bg',
-                                                            'light-danger-bg',
-                                                            'light-info-bg',
-                                                            'light-warning-bg',
-                                                            'light-primary-bg',
-                                                            'light-secondary-bg',
-                                                        ];
-                                                        $randomBg = $bgClasses[array_rand($bgClasses)];
-                                                    @endphp
-                                                    <h6 class="{{ $randomBg }} py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">{{$task->category}}
-                                                    </h6>
-                                                    <div class="task-priority d-flex flex-column align-items-center justify-content-center">
-                                                        <div class="avatar-list avatar-list-stacked m-0">
-                                                            <img class="avatar rounded-circle small-avt" src="{{ asset("storage/". $task->employee->image) }}" alt="">
-                                                        </div>
-                                                            @php
-                                                                $priorityClass = match(strtolower($task->priority)) {
-                                                                    'low' => 'bg-success',
-                                                                    'medium' => 'bg-warning',
-                                                                    'high', 'highest' => 'bg-danger',
-                                                                    default => 'bg-secondary',
-                                                                };
-                                                            @endphp
-                                                        <span class="badge {{ $priorityClass }} text-end mt-2">{{$task->priority}}</span>
-                                                    </div>
+                            <ol class="dd-list col-xxl-4 col-xl-4 col-lg-4 col-md-12 mt-xxl-4 mt-xl-4 mt-lg-4 mt-md-4 mt-sm-4 mt-4"  id="in-progress">
+                                <h6 class="fw-bold py-3 mb-0">In Progress</h6>
+                                @foreach($inProgressTasks as $task)
+                                     <li class="dd-item" data-id="{{$task->id}}">
+                                    <div class="dd-handle">
+                                        <div class="task-info d-flex align-items-center justify-content-between">
+                                            @php
+                                                $bgClasses = [
+                                                    'light-success-bg',
+                                                    'light-danger-bg',
+                                                    'light-info-bg',
+                                                    'light-warning-bg',
+                                                    'light-primary-bg',
+                                                    'light-secondary-bg',
+                                                ];
+                                                $randomBg = $bgClasses[array_rand($bgClasses)];
+                                            @endphp
+                                            <h6 class="{{ $randomBg }} py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">{{$task->category}}
+                                            </h6>
+                                            <div class="task-priority d-flex flex-column align-items-center justify-content-center">
+                                                <div class="avatar-list avatar-list-stacked m-0">
+                                                    <img class="avatar rounded-circle small-avt" src="{{ asset("storage/". $task->employee->image) }}" alt="">
                                                 </div>
-                                                <p class="py-2 mb-0">{{$task->description}}</p>
-                                                <div class="tikit-info row g-3 align-items-center">
-                                                    <div class="col-sm">
-                                                        <ul class="d-flex list-unstyled align-items-center flex-wrap">
-                                                            <li class="me-2">
-                                                                <div class="d-flex align-items-center">
-                                                                    <i class="icofont-flag"></i>
-                                                                    <span class="ms-1">28 Mar</span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="d-flex align-items-center">
-                                                                    <i class="icofont-paper-clip"></i>
-                                                                    <span class="ms-1">5</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-sm text-end">
+                                                    @php
+                                                        $priorityClass = match(strtolower($task->priority)) {
+                                                            'low' => 'bg-success',
+                                                            'medium' => 'bg-warning',
+                                                            'high', 'highest' => 'bg-danger',
+                                                            default => 'bg-secondary',
+                                                        };
+                                                    @endphp
+                                                <span class="badge {{ $priorityClass }} text-end mt-2">{{$task->priority}}</span>
+                                            </div>
+                                        </div>
+                                        <p class="py-2 mb-0 overflow-hidden">{{$task->description}}</p>
+                                        <div class="tikit-info row g-3 align-items-center">
+                                            <div class="col-sm">
+                                                <ul class="d-flex list-unstyled align-items-center flex-wrap">
+                                                    <li class="me-2">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-flag"></i>
+                                                            <span class="ms-1">28 Mar</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-paper-clip"></i>
+                                                            <span class="ms-1">5</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm text-end">
 
-                                                        <div class="small text-truncate light-danger-bg py-1 px-2 rounded-1 d-inline-block fw-bold small"> {{$task->project->name}} </div>
+                                                <div class="small text-truncate light-danger-bg py-1 px-2 rounded-1 d-inline-block fw-bold small"> {{$task->project->name}} </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                @endforeach
+                            </ol>
+                            <ol class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 mt-xxl-4 mt-xl-4 mt-lg-4 mt-md-0 mt-sm-0 mt-0 dd-list" id="needs-review">
+                                 <h6 class="fw-bold py-3 mb-0">Needs Review</h6>
+                                @foreach($needsReviewTasks as $task)
+                                    <li class="dd-item" data-id="{{$task->id}}">
+                                        <div class="dd-handle">
+                                            <div class="task-info d-flex align-items-center justify-content-between">
+                                                @php
+                                                    $bgClasses = [
+                                                        'light-success-bg',
+                                                        'light-danger-bg',
+                                                        'light-info-bg',
+                                                        'light-warning-bg',
+                                                        'light-primary-bg',
+                                                        'light-secondary-bg',
+                                                    ];
+                                                    $randomBg = $bgClasses[array_rand($bgClasses)];
+                                                @endphp
+                                                <h6 class="{{ $randomBg }} py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">{{$task->category}}
+                                                </h6>
+                                                <div class="task-priority d-flex flex-column align-items-center justify-content-center">
+                                                    <div class="avatar-list avatar-list-stacked m-0">
+                                                        <img class="avatar rounded-circle small-avt" src="{{ asset("storage/". $task->employee->image) }}" alt="">
                                                     </div>
+                                                    @php
+                                                        $priorityClass = match(strtolower($task->priority)) {
+                                                            'low' => 'bg-success',
+                                                            'medium' => 'bg-warning',
+                                                            'high', 'highest' => 'bg-danger',
+                                                            default => 'bg-secondary',
+                                                        };
+                                                    @endphp
+                                                    <span class="badge {{ $priorityClass }} text-end mt-2">{{$task->priority}}</span>
                                                 </div>
                                             </div>
-
-                                        </li>
-                                        @endforeach
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 mt-xxl-4 mt-xl-4 mt-lg-4 mt-md-0 mt-sm-0 mt-0" id="needs-review">
-                            <h6 class="fw-bold py-3 mb-0">Needs Review</h6>
-                            <div class="review_task">
-                                <div class="dd" data-plugin="nestable">
-                                    <ol class="dd-list" >
-                                        @foreach($needsReviewTasks as $task)
-                                            <li class="dd-item" data-id="{{$task->id}}">
-                                                <div class="dd-handle">
-                                                    <div class="task-info d-flex align-items-center justify-content-between">
-                                                        @php
-                                                            $bgClasses = [
-                                                                'light-success-bg',
-                                                                'light-danger-bg',
-                                                                'light-info-bg',
-                                                                'light-warning-bg',
-                                                                'light-primary-bg',
-                                                                'light-secondary-bg',
-                                                            ];
-                                                            $randomBg = $bgClasses[array_rand($bgClasses)];
-                                                        @endphp
-                                                        <h6 class="{{ $randomBg }} py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">{{$task->category}}
-                                                        </h6>
-                                                        <div class="task-priority d-flex flex-column align-items-center justify-content-center">
-                                                            <div class="avatar-list avatar-list-stacked m-0">
-                                                                <img class="avatar rounded-circle small-avt" src="{{ asset("storage/". $task->employee->image) }}" alt="">
+                                            <p class="py-2 mb-0 overflow-hidden">{{$task->description}}</p>
+                                            <div class="tikit-info row g-3 align-items-center">
+                                                <div class="col-sm">
+                                                    <ul class="d-flex list-unstyled align-items-center flex-wrap">
+                                                        <li class="me-2">
+                                                            <div class="d-flex align-items-center">
+                                                                <i class="icofont-flag"></i>
+                                                                <span class="ms-1">28 Mar</span>
                                                             </div>
-                                                            @php
-                                                                $priorityClass = match(strtolower($task->priority)) {
-                                                                    'low' => 'bg-success',
-                                                                    'medium' => 'bg-warning',
-                                                                    'high', 'highest' => 'bg-danger',
-                                                                    default => 'bg-secondary',
-                                                                };
-                                                            @endphp
-                                                            <span class="badge {{ $priorityClass }} text-end mt-2">{{$task->priority}}</span>
-                                                        </div>
-                                                    </div>
-                                                    <p class="py-2 mb-0">{{$task->description}}</p>
-                                                    <div class="tikit-info row g-3 align-items-center">
-                                                        <div class="col-sm">
-                                                            <ul class="d-flex list-unstyled align-items-center flex-wrap">
-                                                                <li class="me-2">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <i class="icofont-flag"></i>
-                                                                        <span class="ms-1">28 Mar</span>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="d-flex align-items-center">
-                                                                        <i class="icofont-paper-clip"></i>
-                                                                        <span class="ms-1">5</span>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-sm text-end">
-
-                                                            <div class="small text-truncate light-danger-bg py-1 px-2 rounded-1 d-inline-block fw-bold small"> {{$task->project->name}} </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </li>
-                                        @endforeach
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 mt-xxl-4 mt-xl-4 mt-lg-4 mt-md-0 mt-sm-0 mt-0" id="completed">
-                            <h6 class="fw-bold py-3 mb-0">Completed</h6>
-                            <div class="completed_task">
-                                <div class="dd" data-plugin="nestable">
-                                    <ol class="dd-list" >
-                                        @foreach($completedTasks as $task)
-                                            <li class="dd-item" data-id="{{$task->id}}">
-                                                <div class="dd-handle">
-                                                    <div class="task-info d-flex align-items-center justify-content-between">
-                                                        @php
-                                                            $bgClasses = [
-                                                                'light-success-bg',
-                                                                'light-danger-bg',
-                                                                'light-info-bg',
-                                                                'light-warning-bg',
-                                                                'light-primary-bg',
-                                                                'light-secondary-bg',
-                                                            ];
-                                                            $randomBg = $bgClasses[array_rand($bgClasses)];
-                                                        @endphp
-                                                        <h6 class="{{ $randomBg }} py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">{{$task->category}}
-                                                        </h6>
-                                                        <div class="task-priority d-flex flex-column align-items-center justify-content-center">
-                                                            <div class="avatar-list avatar-list-stacked m-0">
-                                                                <img class="avatar rounded-circle small-avt" src="{{ asset("storage/". $task->employee->image) }}" alt="">
+                                                        </li>
+                                                        <li>
+                                                            <div class="d-flex align-items-center">
+                                                                <i class="icofont-paper-clip"></i>
+                                                                <span class="ms-1">5</span>
                                                             </div>
-                                                            @php
-                                                                $priorityClass = match(strtolower($task->priority)) {
-                                                                    'low' => 'bg-success',
-                                                                    'medium' => 'bg-warning',
-                                                                    'high', 'highest' => 'bg-danger',
-                                                                    default => 'bg-secondary',
-                                                                };
-                                                            @endphp
-                                                            <span class="badge {{ $priorityClass }} text-end mt-2">{{$task->priority}}</span>
-                                                        </div>
-                                                    </div>
-                                                    <p class="py-2 mb-0">{{$task->description}}</p>
-                                                    <div class="tikit-info row g-3 align-items-center">
-                                                        <div class="col-sm">
-                                                            <ul class="d-flex list-unstyled align-items-center flex-wrap">
-                                                                <li class="me-2">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <i class="icofont-flag"></i>
-                                                                        <span class="ms-1">28 Mar</span>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="d-flex align-items-center">
-                                                                        <i class="icofont-paper-clip"></i>
-                                                                        <span class="ms-1">5</span>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-sm text-end">
-
-                                                            <div class="small text-truncate light-danger-bg py-1 px-2 rounded-1 d-inline-block fw-bold small"> {{$task->project->name}} </div>
-                                                        </div>
-                                                    </div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
+                                                <div class="col-sm text-end">
 
-                                            </li>
-                                        @endforeach
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
+                                                    <div class="small text-truncate light-danger-bg py-1 px-2 rounded-1 d-inline-block fw-bold small"> {{$task->project->name}} </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                @endforeach
+                            </ol>
+                            <ol class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 mt-xxl-4 mt-xl-4 mt-lg-4 mt-md-0 mt-sm-0 mt-0 dd-list" id="completed">
+                                <h6 class="fw-bold py-3 mb-0">Completed</h6>
+                                @foreach($completedTasks as $task)
+                                    <li class="dd-item" data-id="{{$task->id}}">
+                                        <div class="dd-handle">
+                                            <div class="task-info d-flex align-items-center justify-content-between">
+                                                @php
+                                                    $bgClasses = [
+                                                        'light-success-bg',
+                                                        'light-danger-bg',
+                                                        'light-info-bg',
+                                                        'light-warning-bg',
+                                                        'light-primary-bg',
+                                                        'light-secondary-bg',
+                                                    ];
+                                                    $randomBg = $bgClasses[array_rand($bgClasses)];
+                                                @endphp
+                                                <h6 class="{{ $randomBg }} py-1 px-2 rounded-1 d-inline-block fw-bold small-14 mb-0">{{$task->category}}
+                                                </h6>
+                                                <div class="task-priority d-flex flex-column align-items-center justify-content-center">
+                                                    <div class="avatar-list avatar-list-stacked m-0">
+                                                        <img class="avatar rounded-circle small-avt" src="{{ asset("storage/". $task->employee->image) }}" alt="">
+                                                    </div>
+                                                    @php
+                                                        $priorityClass = match(strtolower($task->priority)) {
+                                                            'low' => 'bg-success',
+                                                            'medium' => 'bg-warning',
+                                                            'high', 'highest' => 'bg-danger',
+                                                            default => 'bg-secondary',
+                                                        };
+                                                    @endphp
+                                                    <span class="badge {{ $priorityClass }} text-end mt-2">{{$task->priority}}</span>
+                                                </div>
+                                            </div>
+                                            <p class="py-2 mb-0 overflow-hidden">{{$task->description}}</p>
+                                            <div class="tikit-info row g-3 align-items-center">
+                                                <div class="col-sm">
+                                                    <ul class="d-flex list-unstyled align-items-center flex-wrap">
+                                                        <li class="me-2">
+                                                            <div class="d-flex align-items-center">
+                                                                <i class="icofont-flag"></i>
+                                                                <span class="ms-1">28 Mar</span>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="d-flex align-items-center">
+                                                                <i class="icofont-paper-clip"></i>
+                                                                <span class="ms-1">5</span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-sm text-end">
+
+                                                    <div class="small text-truncate light-danger-bg py-1 px-2 rounded-1 d-inline-block fw-bold small"> {{$task->project->name}} </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                @endforeach
+                            </ol>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Jquery Page Js -->
-{{--    <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/bundles/nestable.bundle.js') }}"></script>--}}
-{{--    <script src="{{ asset('js/template.js') }}"></script>--}}
-{{--    <script src="{{ asset('js/page/task.js') }}"></script>--}}
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script>
         const columns = ['in-progress', 'needs-review', 'completed'];
@@ -371,9 +348,6 @@
                     const itemId = evt.item.dataset.id;
                     const newColumn = evt.to.id;
 
-                    const lastItem = evt.to.querySelector('.dd-item:last-child');
-                    const lastItemId = lastItem ? lastItem.dataset.id : null;
-
                     fetch("{{ route('admin.project.task.update-status') }}", {
                         method: 'POST',
                         headers: {
@@ -381,14 +355,14 @@
                             'X-CSRF-TOKEN': '{{ csrf_token() }}',
                         },
                         body: JSON.stringify({
-                            id: lastItemId,
+                            id: itemId,
                             status: newColumn
                         })
                     })
                         .then(res => res.json())
                         .then(data => {
                             if (data.success) {
-                                console.log(`Task ${lastItemId} moved to ${newColumn}`);
+                                console.log(`Task ${itemId} moved to ${newColumn}`);
                             } else {
                                 alert('Failed to update task status');
                             }
