@@ -20,6 +20,7 @@
             @include('includes.sidebar')
             <div class="main px-lg-4 px-md-4">
 {{--                @include('includes.header')--}}
+                @include('includes.common.popups')
                 @yield('content')
             </div>
     </body>
