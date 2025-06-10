@@ -12,16 +12,9 @@
         </a>
 
         <ul class="menu-list flex-grow-1 mt-3">
-            <li class="collapsed">
-                <a class="m-link {{ Request::segment(2) == 'hr-dashboard' || Request::segment(2) == 'project-dashboard' ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#dashboard-Components" href="#">
-                    <i class="icofont-home fs-5"></i> <span>Dashboard</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-                <!-- Menu: Sub menu ul -->
-                <ul class="sub-menu collapse {{ Request::segment(2) == 'hr-dashboard' || Request::segment(2) == 'project-dashboard' ? 'show' : '' }}" id="dashboard-Components">
-                    <li><a class="ms-link {{ Request::segment(2) == 'hr-dashboard' ? 'active' : '' }}" href="{{ route('admin.dashboard') }}"> <span>Hr Dashboard</span></a></li>
-                    <li><a class="ms-link {{ Request::segment(2) == 'project-dashboard' ? 'active' : '' }}" href="{{ route('admin.project') }}"> <span>Project Dashboard</span></a></li>
-                </ul>
-            </li>
-{{--            <li class=" {{ Request::is('admin/auth/user') || Request::is('admin/auth/role')  || Request::is('admin/auth/role/create') ? '' : ' collapsed' }}">--}}
+            <li><a class="ms-link {{ Request::segment(2) == 'project-dashboard' ? 'active' : '' }}" href="{{ route('admin.dashboard') }}"> <span>Dashboard</span></a></li>
+
+            {{--            <li class=" {{ Request::is('admin/auth/user') || Request::is('admin/auth/role')  || Request::is('admin/auth/role/create') ? '' : ' collapsed' }}">--}}
 {{--                <a class="m-link {{ Request::is('admin/auth/user') || Request::is('admin/auth/role') || Request::is('admin/auth/role/create') ? 'collapse show active' : '' }}{{ Request::is('admin/auth/role') ? 'collapse show active' : '' }}" data-bs-toggle="collapse" data-bs-target="#access" href="#"><i class="fa fa-lock"></i> <span>Access</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>--}}
 
 {{--                <!-- Menu: Sub menu ul -->--}}
@@ -31,7 +24,7 @@
 {{--                    <li><a class="ms-link {{ Request::is('admin/auth/role') || Request::is('admin/auth/role/create') ? 'active' : '' }}" href="{{ route('admin.auth.role.index') }}">Role Management</a></li>--}}
 {{--                </ul>--}}
 {{--            </li>--}}
-            <li  class="collapsed">
+            <li class="collapsed">
                 <a class="m-link {{ Request::segment(2)=='project' ? 'active' : '' }}"  data-bs-toggle="collapse" data-bs-target="#project-Components" href="#">
                     <i class="icofont-briefcase"></i><span>Projects</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
                 <!-- Menu: Sub menu ul -->
@@ -52,15 +45,15 @@
 {{--                    <li><a class="ms-link {{  Request::segment(3) == 'ticket-detail' ? 'active' : '' }}" href="{{ route('admin.ticket.ticket-detail') }}"> <span>Ticket Detail</span></a></li>--}}
 {{--                </ul>--}}
 {{--            </li>--}}
-            <li class="collapsed">
-                <a class="m-link {{ Request::segment(2)=='out-client' ? 'active' : '' }} " data-bs-toggle="collapse" data-bs-target="#client-Components" href="#"><i
-                        class="icofont-user-male"></i> <span>Our Clients</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-                <!-- Menu: Sub menu ul -->
-                <ul class="sub-menu {{ Request::segment(2)=='out-client' ? 'collapsed show' : 'collapse' }}" id="client-Components">
-                    <li><a class="ms-link {{ Request::segment(3) == 'clients' ? 'active' : '' }}" href="{{ route('admin.out-client.clients') }}"> <span>Clients</span></a></li>
-                    <li><a class="ms-link {{ Request::segment(3) == 'clients-profile' ? 'active' : '' }}" href="{{ route('admin.out-client.clients-profile') }}"> <span>Client Profile</span></a></li>
-                </ul>
-            </li>
+{{--            <li class="collapsed">--}}
+{{--                <a class="m-link {{ Request::segment(2)=='out-client' ? 'active' : '' }} " data-bs-toggle="collapse" data-bs-target="#client-Components" href="#"><i--}}
+{{--                        class="icofont-user-male"></i> <span>Our Clients</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>--}}
+{{--                <!-- Menu: Sub menu ul -->--}}
+{{--                <ul class="sub-menu {{ Request::segment(2)=='out-client' ? 'collapsed show' : 'collapse' }}" id="client-Components">--}}
+{{--                    <li><a class="ms-link {{ Request::segment(3) == 'clients' ? 'active' : '' }}" href="{{ route('admin.out-client.clients') }}"> <span>Clients</span></a></li>--}}
+{{--                    <li><a class="ms-link {{ Request::segment(3) == 'clients-profile' ? 'active' : '' }}" href="{{ route('admin.out-client.clients-profile') }}"> <span>Client Profile</span></a></li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
             <li class="collapsed">
                 <a class="m-link {{ Request::segment(2)=='our-employee' ? 'active' : '' }} " data-bs-toggle="collapse" data-bs-target="#emp-Components" href="#"><i
                         class="icofont-users-alt-5"></i> <span>Employees</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
@@ -69,30 +62,30 @@
                     <li><a class="ms-link {{ Request::segment(3) == 'members' ? 'active' : '' }}" href="{{ route('admin.our-employee.members') }}"> <span>Employees</span></a></li>
                     <li><a class="ms-link {{ Request::segment(3) == 'holidays' ? 'active' : '' }}" href="{{ route('admin.our-employee.holidays.index') }}"> <span>Holidays</span></a></li>
                     <li><a class="ms-link {{ Request::segment(3) == 'attendance' ? 'active' : '' }}" href="{{ route('admin.our-employee.attendance.index') }}"> <span>Attendance</span></a></li>
-                    <li><a class="ms-link {{ Request::segment(3) == 'leave-request' ? 'active' : '' }}" href="{{ route('admin.our-employee.leave-request') }}"> <span>Leave Request</span></a></li>
+{{--                    <li><a class="ms-link {{ Request::segment(3) == 'leave-request' ? 'active' : '' }}" href="{{ route('admin.our-employee.leave-request') }}"> <span>Leave Request</span></a></li>--}}
                     <li><a class="ms-link {{ Request::segment(3) == 'department' ? 'active' : '' }}" href="{{ route('admin.our-employee.department') }}"> <span>Department</span></a></li>
                 </ul>
             </li>
 
-            <li class="collapsed">
-                <a class="m-link {{ Request::segment(2)=='accounts' ? 'active' : '' }} " data-bs-toggle="collapse" data-bs-target="#menu-Componentsone" href="#"><i
-                        class="icofont-ui-calculator"></i> <span>Accounts</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-                <!-- Menu: Sub menu ul -->
-                <ul class="sub-menu {{ Request::segment(2)=='accounts' ? 'collapsed show' : 'collapse' }}" id="menu-Componentsone">
-                    <li><a class="ms-link {{ Request::segment(3) == 'invocies' ? 'active' : '' }}" href="{{ route('admin.accounts.invocies') }}"><span>Invoices</span> </a></li>
-                    <li><a class="ms-link {{ Request::segment(3) == 'payments' ? 'active' : '' }}" href="{{ route('admin.accounts.payments') }}"><span>Payments</span> </a></li>
-                    <li><a class="ms-link {{ Request::segment(3) == 'expenses' ? 'active' : '' }}" href="{{ route('admin.accounts.expenses') }}"><span>Expenses</span> </a></li>
-                </ul>
-            </li>
-            <li class="collapsed">
-                <a class="m-link {{ Request::segment(2)=='payroll' ? 'active' : '' }} " data-bs-toggle="collapse" data-bs-target="#payroll-Components" href="#"><i
-                        class="icofont-users-alt-5"></i> <span>Payroll</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-                <!-- Menu: Sub menu ul -->
-                <ul class="sub-menu {{ Request::segment(2)=='payroll' ? 'collapsed show' : 'collapse' }}" id="payroll-Components">
-                    <li><a class="ms-link {{ Request::segment(3) == 'employee-salary' ? 'active' : '' }}" href="{{ route('admin.employee-salary') }}"><span>Employee Salary</span> </a></li>
+{{--            <li class="collapsed">--}}
+{{--                <a class="m-link {{ Request::segment(2)=='accounts' ? 'active' : '' }} " data-bs-toggle="collapse" data-bs-target="#menu-Componentsone" href="#"><i--}}
+{{--                        class="icofont-ui-calculator"></i> <span>Accounts</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>--}}
+{{--                <!-- Menu: Sub menu ul -->--}}
+{{--                <ul class="sub-menu {{ Request::segment(2)=='accounts' ? 'collapsed show' : 'collapse' }}" id="menu-Componentsone">--}}
+{{--                    <li><a class="ms-link {{ Request::segment(3) == 'invocies' ? 'active' : '' }}" href="{{ route('admin.accounts.invocies') }}"><span>Invoices</span> </a></li>--}}
+{{--                    <li><a class="ms-link {{ Request::segment(3) == 'payments' ? 'active' : '' }}" href="{{ route('admin.accounts.payments') }}"><span>Payments</span> </a></li>--}}
+{{--                    <li><a class="ms-link {{ Request::segment(3) == 'expenses' ? 'active' : '' }}" href="{{ route('admin.accounts.expenses') }}"><span>Expenses</span> </a></li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
+{{--            <li class="collapsed">--}}
+{{--                <a class="m-link {{ Request::segment(2)=='payroll' ? 'active' : '' }} " data-bs-toggle="collapse" data-bs-target="#payroll-Components" href="#"><i--}}
+{{--                        class="icofont-users-alt-5"></i> <span>Payroll</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>--}}
+{{--                <!-- Menu: Sub menu ul -->--}}
+{{--                <ul class="sub-menu {{ Request::segment(2)=='payroll' ? 'collapsed show' : 'collapse' }}" id="payroll-Components">--}}
+{{--                    <li><a class="ms-link {{ Request::segment(3) == 'employee-salary' ? 'active' : '' }}" href="{{ route('admin.employee-salary') }}"><span>Employee Salary</span> </a></li>--}}
 
-                </ul>
-            </li>
+{{--                </ul>--}}
+{{--            </li>--}}
         </ul>
 
         <!-- Menu: menu collepce btn -->

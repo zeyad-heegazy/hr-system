@@ -19,7 +19,7 @@
     <body id="mytask-layout" class="theme-indigo">
             @include('includes.sidebar')
             <div class="main px-lg-4 px-md-4">
-                @include('includes.header')
+{{--                @include('includes.header')--}}
                 @yield('content')
             </div>
     </body>
