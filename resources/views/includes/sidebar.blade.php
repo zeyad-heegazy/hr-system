@@ -43,15 +43,15 @@
                 </ul>
             </li>
 
-            <li class="collapsed">
-                <a class="m-link {{ Request::segment(2)=='ticket' ? 'active' : '' }} " data-bs-toggle="collapse" data-bs-target="#tikit-Components" href="#"><i
-                        class="icofont-ticket"></i> <span>Tickets</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-                <!-- Menu: Sub menu ul -->
-                <ul class="sub-menu {{ Request::segment(2)=='ticket' ? 'collapsed show' : 'collapse' }}" id="tikit-Components">
-                    <li><a class="ms-link {{  Request::segment(3) == 'ticket-view' ? 'active' : '' }}" href="{{ route('admin.ticket.ticket-view') }}"> <span>Tickets View</span></a></li>
-                    <li><a class="ms-link {{  Request::segment(3) == 'ticket-detail' ? 'active' : '' }}" href="{{ route('admin.ticket.ticket-detail') }}"> <span>Ticket Detail</span></a></li>
-                </ul>
-            </li>
+{{--            <li class="collapsed">--}}
+{{--                <a class="m-link {{ Request::segment(2)=='ticket' ? 'active' : '' }} " data-bs-toggle="collapse" data-bs-target="#tikit-Components" href="#"><i--}}
+{{--                        class="icofont-ticket"></i> <span>Tickets</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>--}}
+{{--                <!-- Menu: Sub menu ul -->--}}
+{{--                <ul class="sub-menu {{ Request::segment(2)=='ticket' ? 'collapsed show' : 'collapse' }}" id="tikit-Components">--}}
+{{--                    <li><a class="ms-link {{  Request::segment(3) == 'ticket-view' ? 'active' : '' }}" href="{{ route('admin.ticket.ticket-view') }}"> <span>Tickets View</span></a></li>--}}
+{{--                    <li><a class="ms-link {{  Request::segment(3) == 'ticket-detail' ? 'active' : '' }}" href="{{ route('admin.ticket.ticket-detail') }}"> <span>Ticket Detail</span></a></li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
             <li class="collapsed">
                 <a class="m-link {{ Request::segment(2)=='out-client' ? 'active' : '' }} " data-bs-toggle="collapse" data-bs-target="#client-Components" href="#"><i
                         class="icofont-user-male"></i> <span>Our Clients</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
@@ -68,8 +68,7 @@
                 <ul class="sub-menu  {{ Request::segment(2)=='our-employee' ? 'collapsed show' : 'collapse' }}" id="emp-Components">
                     <li><a class="ms-link {{ Request::segment(3) == 'members' ? 'active' : '' }}" href="{{ route('admin.our-employee.members') }}"> <span>Employees</span></a></li>
                     <li><a class="ms-link {{ Request::segment(3) == 'holidays' ? 'active' : '' }}" href="{{ route('admin.our-employee.holidays.index') }}"> <span>Holidays</span></a></li>
-                    <li><a class="ms-link {{ Request::segment(3) == 'attendance-employee' ? 'active' : '' }}" href="{{ route('admin.our-employee.attendance-employee') }}"> <span>Attendance Employees </span></a></li>
-                    <li><a class="ms-link {{ Request::segment(3) == 'attendance' ? 'active' : '' }}" href="{{ route('admin.our-employee.attendance') }}"> <span>Attendance</span></a></li>
+                    <li><a class="ms-link {{ Request::segment(3) == 'attendance' ? 'active' : '' }}" href="{{ route('admin.our-employee.attendance.index') }}"> <span>Attendance</span></a></li>
                     <li><a class="ms-link {{ Request::segment(3) == 'leave-request' ? 'active' : '' }}" href="{{ route('admin.our-employee.leave-request') }}"> <span>Leave Request</span></a></li>
                     <li><a class="ms-link {{ Request::segment(3) == 'department' ? 'active' : '' }}" href="{{ route('admin.our-employee.department') }}"> <span>Department</span></a></li>
                 </ul>

@@ -7,6 +7,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\HolidayController;
+use App\Http\Controllers\AttendanceController;
 
 Route::get('/', function () {
     return redirect()->route('admin.dashboard');
@@ -64,8 +65,11 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/our-employee/holidays', [HolidayController::class, 'store'])->name('admin.our-employee.holidays.store');
     Route::delete('/our-employee/{id}/holidays', [HolidayController::class, 'destroy'])->name('admin.our-employee.holidays.destroy');
     Route::patch('/our-employee/{id}/holidays', [HolidayController::class, 'update'])->name('admin.our-employee.holidays.update');
-    Route::get('/our-employee/attendance-employee', fn() => view('admin.our-employee.attendance-employee'))->name('admin.our-employee.attendance-employee');
-    Route::get('/our-employee/attendance', fn() => view('admin.our-employee.attendance'))->name('admin.our-employee.attendance');
+    Route::get('/our-employee/attendance', [AttendanceController::class, 'index'])->name('admin.our-employee.attendance.index');
+    Route::get('/our-employee/{employeeId}/attendance-employee', [AttendanceController::class, 'show'])->name('admin.our-employee.attendance-employee');
+    Route::post('/our-employee/attendance-employee/punch-in', [AttendanceController::class, 'punchIn'])->name('admin.our-employee.attendance-employee.store.user');
+    Route::post('/our-employee/attendance-employee/punch-out', [AttendanceController::class, 'punchOut'])->name('admin.our-employee.attendance-employee.punch-out');
+
     Route::get('/our-employee/leave-request', fn() => view('admin.our-employee.leave-request'))->name('admin.our-employee.leave-request');
     Route::get('/our-employee/department', [DepartmentController::class, 'index'])->name('admin.our-employee.department');
     Route::post('/our-employee/department', [DepartmentController::class, 'store'])->name('admin.our-employee.department.store');
