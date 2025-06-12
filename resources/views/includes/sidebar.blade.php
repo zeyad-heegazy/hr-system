@@ -88,6 +88,20 @@
 {{--            </li>--}}
 
             <li>
+                <a class="m-link" href="{{route('admin.salary.predict')}}">
+                    <i class="icofont-calculator-alt-2"></i><span>Salary Prediction</span>
+                </a>
+            </li>
+
+            <li>
+                <a class="m-link" href="{{route('admin.assign.task')}}">
+                    <i class="icofont-tasks-alt"></i><span>Auto Assign Task</span>
+                </a>
+            </li>
+
+
+
+            <li>
                 <a class="m-link {{ Request::segment(2)=='project' ? 'active' : '' }}">
                     <i class="icofont-briefcase"></i><span>Projects</span>
                 </a>

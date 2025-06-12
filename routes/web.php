@@ -8,6 +8,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\AIController;
 
 Route::get('/', function () {
     return redirect()->route('admin.dashboard');
@@ -26,6 +27,12 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     // Dashboard main
     Route::get('/dashboard', fn() => view('admin.dashboard'))->middleware(['verified'])->name('admin.dashboard');
+
+
+    Route::get('/salary/predict', [AIController::class, 'indexSalaryPrediction'])->name('admin.salary.predict');
+    Route::get('/assign/task', [AIController::class, 'indexAssignTasks'])->name('admin.assign.task');
+    Route::post('/assign/task/api', [AIController::class, 'assignTaskAjax'])->name('admin.assign.task.api');
+
 
     // Help Page
     Route::get('/help', fn() => view('admin.help'))->name('admin.help');
