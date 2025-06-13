@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 
 class AIController extends Controller
@@ -72,26 +74,35 @@ class AIController extends Controller
             "SQL"
         ];
 
-        if ($request->ajax()) {
-            $skillIndices = $request->input('skill_indices', []);
-            $complexity = ucfirst($request->input('complexity'));
+        $tasks = DB::table('ai_tasks')->select('id', 'name', 'complexity', 'skill_indices')->get();
 
-            $response = Http::post('https://task000.onrender.com/assign-task', [
-                'complexity' => $complexity,
-                'skill_indices' => $skillIndices,
-            ]);
-
-            return response()->json($response->json(), $response->status());
-        }
-
-        return view('AI.assignTasks', compact('skills'));
+        return view('AI.assignTasks', compact('skills', 'tasks'));
     }
 
     public function assignTaskAjax(Request $request)
     {
-        $response = Http::post('https://task000.onrender.com/assign-task', [
-            'complexity' => ucfirst($request->complexity),
-            'skill_indices' => $request->skill_indices,
+        $validated = $request->validate([
+            'complexity' => 'required|string',
+            'skill_indices' => 'required|array',
+            'skill_indices.*' => 'integer',
+        ]);
+
+        $complexity = ucfirst($validated['complexity']);
+        $skillIndices = array_map('intval', $validated['skill_indices']);
+
+        Log::info('Assigning Task Request:', [
+            'complexity' => $complexity,
+            'skill_indices' => $skillIndices,
+        ]);
+
+        $response = Http::post('https://task001.onrender.com/assign-task', [
+            'complexity' => $complexity,
+            'skill_indices' => $skillIndices,
+        ]);
+
+        Log::info('AI Response:', [
+            'status' => $response->status(),
+            'body' => $response->json(),
         ]);
 
         return response()->json($response->json(), $response->status());

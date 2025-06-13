@@ -31,7 +31,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/salary/predict', [AIController::class, 'indexSalaryPrediction'])->name('admin.salary.predict');
     Route::get('/assign/task', [AIController::class, 'indexAssignTasks'])->name('admin.assign.task');
-    Route::post('/assign/task/api', [AIController::class, 'assignTaskAjax'])->name('admin.assign.task.api');
+    Route::post('/assign/task', [AIController::class, 'assignTaskAjax'])->name('admin.assign.task.post');
 
 
     // Help Page
