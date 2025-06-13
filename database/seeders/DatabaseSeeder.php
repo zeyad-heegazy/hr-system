@@ -35,5 +35,9 @@ class DatabaseSeeder extends Seeder
             ['name' => 'marketing'],
             ['name' => 'Support'],
         ]);
+
+        $this->call([
+            AITaskSeeder::class,
+        ]);
     }
 }
