@@ -36,6 +36,12 @@
 
                     <button type="submit" class="btn btn-primary">Assign Task</button>
                 </form>
+
+                <div id="loadingSpinner" class="text-center my-3" style="display: none;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -91,9 +97,14 @@
             const taskSelect = document.getElementById('task_id');
             const selectedOption = taskSelect.options[taskSelect.selectedIndex];
             const complexity = selectedOption.getAttribute('data-complexity');
-            const skillIndices = selectedOption.getAttribute('data-skills').split(',').map(Number);
 
-            fetch("{{route('admin.assign.task.post')}}", {
+            const skillIndices = selectedOption.getAttribute('data-skills')
+                .split(',')
+                .map(i => Number(i) + 1);
+
+            document.getElementById('loadingSpinner').style.display = 'block';
+
+            fetch("{{ route('admin.assign.task.post') }}", {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
@@ -104,7 +115,7 @@
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
+                    console.log(data);
                     document.getElementById('taskComplexity').innerText = data.task_complexity;
                     document.getElementById('taskSkills').innerText = Array.isArray(data.skills)
                         ? data.skills.join(', ')
@@ -121,6 +132,9 @@
                 .catch(err => {
                     alert('Something went wrong');
                     console.error(err);
+                })
+                .finally(() => {
+                    document.getElementById('loadingSpinner').style.display = 'none';
                 });
         });
     </script>
